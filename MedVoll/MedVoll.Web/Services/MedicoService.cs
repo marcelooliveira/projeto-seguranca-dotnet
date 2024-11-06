@@ -4,7 +4,7 @@ using MedVoll.Web.Models;
 
 namespace MedVoll.Web.Services
 {
-    public class MedicoService
+    public class MedicoService : IMedicoService
     {
         private readonly IMedicoRepository _repository;
 
