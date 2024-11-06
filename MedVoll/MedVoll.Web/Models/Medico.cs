@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
+using MedVoll.Web.Dados;
+
+namespace MedVoll.Web.Models
+{
+    [Table("medicos")]
+    public class Medico
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; private set; }
+
+        [Required]
+        public string Nome { get; private set; }
+
+        [Required, EmailAddress]
+        public string Email { get; private set; }
+
+        [Required]
+        public string Telefone { get; private set; }
+
+        [Required, RegularExpression(@"^\d{4,6}$", ErrorMessage = "CRM deve ter de 4 a 6 digitos numéricos")]
+        public string Crm { get; private set; }
+
+        [Required]
+        public Especialidade Especialidade { get; private set; }
+
+        public Medico() { }
+
+        public Medico(DadosCadastroMedico dados)
+        {
+            AtualizarDados(dados);
+        }
+
+        public void AtualizarDados(DadosCadastroMedico dados)
+        {
+            Nome = dados.Nome;
+            Email = dados.Email;
+            Telefone = dados.Telefone;
+            Crm = dados.Crm;
+            Especialidade = dados.Especialidade;
+        }
+    }
+}
+
+
