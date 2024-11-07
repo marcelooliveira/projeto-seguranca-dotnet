@@ -1,5 +1,6 @@
 ﻿using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedVoll.Web.Repositories
 {
@@ -14,7 +15,7 @@ namespace MedVoll.Web.Repositories
 
         public async Task<IQueryable<Consulta>> GetAllOrderedByDataAsync()
         {
-            return _context.Consultas.OrderBy(c => c.Data).AsQueryable();
+            return _context.Consultas.Include(c => c.Medico).OrderBy(c => c.Data).AsQueryable();
         }
 
         public async Task SaveAsync(Consulta consulta)

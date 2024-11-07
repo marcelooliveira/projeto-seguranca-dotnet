@@ -25,17 +25,13 @@ namespace MedVoll.Web.Models
         [Required]
         public string Paciente { get; private set; }
 
-        [ForeignKey("MedicoId")]
-        [JsonIgnore]
-        public Medico Medico { get; private set; }
+        [Required]
+        public long MedicoId { get; private set; }
 
-        public long MedicoId 
-        { 
-            get { return Medico.Id; } 
-            private set { } 
-        }
 
         public DateTime Data { get; private set; }
+
+        public virtual Medico Medico { get; private set; }
 
         public Consulta() { }
 
