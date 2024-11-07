@@ -7,6 +7,6 @@ namespace MedVoll.Web.Interfaces
         Task CadastrarAsync(DadosAgendamentoConsulta dados);
         Task<DadosAgendamentoConsulta> CarregarPorIdAsync(long id);
         Task ExcluirAsync(long id);
-        Task<IQueryable<DadosListagemConsulta>> ListarAsync();
+        Task<IEnumerable<DadosListagemConsulta>> ListarAsync();
     }
 }

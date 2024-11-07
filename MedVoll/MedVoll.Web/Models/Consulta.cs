@@ -29,6 +29,12 @@ namespace MedVoll.Web.Models
         [JsonIgnore]
         public Medico Medico { get; private set; }
 
+        public long MedicoId 
+        { 
+            get { return Medico.Id; } 
+            private set { } 
+        }
+
         public DateTime Data { get; private set; }
 
         public Consulta() { }

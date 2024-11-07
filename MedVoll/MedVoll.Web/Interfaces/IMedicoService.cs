@@ -8,7 +8,7 @@ namespace MedVoll.Web.Interfaces
         Task CadastrarAsync(DadosCadastroMedico dados);
         Task<DadosCadastroMedico> CarregarPorIdAsync(long id);
         Task ExcluirAsync(long id);
-        Task<IQueryable<DadosListagemMedico>> ListarAsync();
-        Task<List<DadosListagemMedico>> ListarPorEspecialidadeAsync(Especialidade especialidade);
+        Task<IEnumerable<DadosListagemMedico>> ListarAsync();
+        Task<IEnumerable<DadosListagemMedico>> ListarPorEspecialidadeAsync(Especialidade especialidade);
     }
 }

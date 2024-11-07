@@ -10,8 +10,8 @@ namespace MedVoll.Web.Controllers
     [Route("medicos")]
     public class MedicoController : Controller
     {
-        private const string PaginaListagem = "Medico/ListagemMedicos";
-        private const string PaginaCadastro = "Medico/FormularioMedico";
+        private const string PaginaListagem = "ListagemMedicos";
+        private const string PaginaCadastro = "FormularioMedico";
         private const string RedirectListagem = "redirect:/medicos?sucesso";
         private readonly IMedicoService _service;
 
@@ -22,11 +22,11 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public IActionResult CarregarPaginaListagem([FromQuery] int page = 1)
+        public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
-            var medicosCadastrados = _service.ListarAsync();
+            var medicosCadastrados = await _service.ListarAsync();
             ViewBag.Medicos = medicosCadastrados;
-            return View(PaginaListagem);
+            return View(PaginaListagem, medicosCadastrados);
         }
 
         [HttpGet]

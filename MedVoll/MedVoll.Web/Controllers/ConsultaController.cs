@@ -1,5 +1,6 @@
 ﻿using MedVoll.Web.Dados;
 using MedVoll.Web.Exceptions;
+using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 using MedVoll.Web.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +11,13 @@ namespace MedVoll.Web.Controllers
     [Route("consultas")]
     public class ConsultaController : Controller
     {
-        private const string PaginaListagem = "Consulta/ListagemConsultas";
-        private const string PaginaCadastro = "Consulta/FormularioConsulta";
+        private const string PaginaListagem = "ListagemConsultas";
+        private const string PaginaCadastro = "FormularioConsulta";
         private const string RedirectListagem = "redirect:/consultas?sucesso";
 
-        private readonly ConsultaService _service;
+        private readonly IConsultaService _service;
 
-        public ConsultaController(ConsultaService consultaService)
+        public ConsultaController(IConsultaService consultaService)
         {
             _service = consultaService;
         }
@@ -27,7 +28,7 @@ namespace MedVoll.Web.Controllers
         {
             var consultasAtivas = await _service.ListarAsync();
             ViewBag.Consultas = consultasAtivas;
-            return View(PaginaListagem);
+            return View(PaginaListagem, consultasAtivas);
         }
 
         [HttpGet]

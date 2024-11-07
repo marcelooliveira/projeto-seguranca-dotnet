@@ -15,7 +15,7 @@ namespace MedVoll.Web.Services
             _medicoRepository = medicoRepository;
         }
 
-        public async Task<IQueryable<DadosListagemConsulta>> ListarAsync()
+        public async Task<IEnumerable<DadosListagemConsulta>> ListarAsync()
         {
             var consultas = await _consultaRepository.GetAllOrderedByDataAsync();
             return consultas.Select(c => new DadosListagemConsulta(c));

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MedVoll.Web.Dados;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations.Schema;
-using MedVoll.Web.Dados;
 
 namespace MedVoll.Web.Models
 {
@@ -33,6 +25,8 @@ namespace MedVoll.Web.Models
 
         [Required]
         public Especialidade Especialidade { get; private set; }
+
+        public virtual ICollection<Consulta>? Consultas { get; set; }
 
         public Medico() { }
 

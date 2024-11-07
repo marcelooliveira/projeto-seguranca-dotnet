@@ -1,0 +1,44 @@
+@model PagedList.IPagedList<int>
+
+@{
+    var url = ViewData["Url"] as string ?? "/";
+}
+
+<div class="table-footer">
+    @if (Model != null && Model.TotalItemCount > 0)
+    {
+    <p class="results">
+            Exibindo <b>@Model.Count</b> de <b>@Model.TotalItemCount</b> registros
+    </p>
+    <div class="pagination">
+        @{
+                var anterior = Model.HasPreviousPage ? $"{url}?page={Model.PageNumber - 1}" : "";
+                var proximo = Model.HasNextPage ? $"{url}?page={Model.PageNumber + 1}" : "";
+        }
+
+            <a href="@anterior" class="btn btn-pagination @(Model.HasPreviousPage ? " " : " disabled")">Anterior</a>
+
+            @for (var i = 1; i <= Model.PageCount; i++)
+        {
+                if (i == Model.PageNumber)
+        {
+        <span class="page-item active disabled">
+            <span class="current-page">@i</span>
+        </span>
+        }
+        else
+        {
+        <span class="page-item">
+            <a href="@($" {url}?page={i - 1}")" class="page-link">@i</a>
+        </span>
+        }
+        }
+
+            <a href="@proximo" class="btn btn-pagination @(Model.HasNextPage ? " " : " disabled")">Próximo</a>
+    </div>
+    }
+    else
+    {
+    <div class="hint-text">Nenhum registro encontrado.</div>
+    }
+</div>

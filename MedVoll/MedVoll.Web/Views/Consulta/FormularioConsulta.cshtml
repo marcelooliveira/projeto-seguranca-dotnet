@@ -1,0 +1,62 @@
+﻿@model MedVoll.Web.Dados.DadosAgendamentoConsulta
+@{
+    ViewData["Title"] = "Agendamento de Consultas";
+    var especialidades = ViewBag("Especialidades") as List<Especialidade>;
+    var medicos = ViewBag("Medicos") as List<Medico>;
+}
+
+<main class="container">
+    <section class="card form-card">
+        <h2 class="title">Agendamento de Consultas</h2>
+
+        <form method="post" asp-action="Cadastrar" asp-controller="Consultas" asp-route-id="@Model.Id">
+            <input type="hidden" name="id" asp-for="Id" />
+
+            <div class="form-group">
+                <label for="especialidade">Especialidade</label>
+                <select id="especialidade" name="especialidade" class="form-control" required asp-for="Especialidade">
+                    <option value="">Selecione uma especialidade</option>
+                    @foreach (var especialidade in especialidades)
+                    {
+                        <option value="@especialidade">@especialidade</option>
+                    }
+                </select>
+                <div class="alert alert-danger" asp-validation-for="Especialidade"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="idMedico">Médico</label>
+                <select id="idMedico" name="idMedico" class="form-control" required asp-for="IdMedico">
+                    <option value="">Selecione um médico</option>
+                    @foreach (var medico in medicos)
+                    {
+                        <option value="@medico.Id">@medico.Nome</option>
+                    }
+                </select>
+                <div class="alert alert-danger" asp-validation-for="IdMedico"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF do Paciente</label>
+                <input type="text" id="cpf" class="form-control" placeholder="Digite o CPF do paciente" required asp-for="@Model.Paciente" />
+                <div class="alert alert-danger" asp-validation-for="Cpf"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="datetime-local" id="data" class="form-control" required asp-for="Data" />
+                <div class="alert alert-danger" asp-validation-for="Data"></div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary">
+                    <img src="~/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">Cadastrar
+                </button>
+
+                <a href="@Url.Action(" Index", "Consultas" )" class="btn btn-secondary">
+                    <img src="~/assets/back.png" alt="Voltar" class="btn-icon">Voltar
+                </a>
+            </div>
+        </form>
+    </section>
+</main>

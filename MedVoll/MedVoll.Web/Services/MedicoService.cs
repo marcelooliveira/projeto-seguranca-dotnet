@@ -13,10 +13,10 @@ namespace MedVoll.Web.Services
             _repository = repository;
         }
 
-        public async Task<IQueryable<DadosListagemMedico>> ListarAsync()
+        public async Task<IEnumerable<DadosListagemMedico>> ListarAsync()
         {
             var medicos = await _repository.GetAllAsync();
-            return medicos.Select(m => new DadosListagemMedico(m));
+            return medicos.Select(m => new DadosListagemMedico(m)).ToList();
         }
 
         public async Task CadastrarAsync(DadosCadastroMedico dados)
@@ -54,7 +54,7 @@ namespace MedVoll.Web.Services
             await _repository.DeleteByIdAsync(id);
         }
 
-        public async Task<List<DadosListagemMedico>> ListarPorEspecialidadeAsync(Especialidade especialidade)
+        public async Task<IEnumerable<DadosListagemMedico>> ListarPorEspecialidadeAsync(Especialidade especialidade)
         {
             var medicos = await _repository.FindByEspecialidadeAsync(especialidade);
             return medicos.Select(m => new DadosListagemMedico(m)).ToList();
