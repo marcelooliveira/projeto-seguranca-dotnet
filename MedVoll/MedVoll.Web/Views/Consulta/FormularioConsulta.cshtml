@@ -1,15 +1,15 @@
 ﻿@model MedVoll.Web.Dados.DadosAgendamentoConsulta
 @{
     ViewData["Title"] = "Agendamento de Consultas";
-    var especialidades = ViewBag("Especialidades") as List<Especialidade>;
-    var medicos = ViewBag("Medicos") as List<Medico>;
+    var especialidades = ViewData["Especialidades"] as List<Especialidade>;
+    var medicos = ViewData["Medicos"] as List<Medico>;
 }
 
 <main class="container">
     <section class="card form-card">
         <h2 class="title">Agendamento de Consultas</h2>
 
-        <form method="post" asp-action="Cadastrar" asp-controller="Consultas" asp-route-id="@Model.Id">
+        <form method="post" asp-action="" asp-controller="Consultas">
             <input type="hidden" name="id" asp-for="Id" />
 
             <div class="form-group">
@@ -26,14 +26,15 @@
 
             <div class="form-group">
                 <label for="idMedico">Médico</label>
-                <select id="idMedico" name="idMedico" class="form-control" required asp-for="IdMedico">
+                <input type="text" id="medico" class="form-control" placeholder="Médico" required asp-for="@Model.IdMedico" disabled />
+@*                 <select id="idMedico" name="idMedico" class="form-control" required asp-for="IdMedico">
                     <option value="">Selecione um médico</option>
                     @foreach (var medico in medicos)
                     {
                         <option value="@medico.Id">@medico.Nome</option>
                     }
                 </select>
-                <div class="alert alert-danger" asp-validation-for="IdMedico"></div>
+                <div class="alert alert-danger" asp-validation-for="IdMedico"></div> *@
             </div>
 
             <div class="form-group">
@@ -49,9 +50,7 @@
             </div>
 
             <div class="buttons">
-                <button type="submit" class="btn btn-primary">
-                    <img src="~/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">Cadastrar
-                </button>
+                <input type="submit" class="btn btn-primary btn-with-icon" value="Cadastrar">
 
                 <a href="@Url.Action(" Index", "Consultas" )" class="btn btn-secondary">
                     <img src="~/assets/back.png" alt="Voltar" class="btn-icon">Voltar

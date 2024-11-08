@@ -593,3 +593,11 @@ body {
         max-height: 268px;
     }
 }
+
+.btn-with-icon {
+    background-image: url('/assets/plus.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 30px; /* Adjust padding to make room for the icon */
+    background-size: 20px 20px; /* Adjust size as needed */
+}

@@ -24,9 +24,15 @@ namespace MedVoll.Web.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(Consulta consulta)
+        {
+            _context.Update(consulta);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Consulta> FindByIdAsync(long id)
         {
-            return await _context.Consultas.FindAsync(id);
+            return await _context.Consultas.Include(c => c.Medico).SingleAsync(c => c.Id == id);
         }
 
         public async Task DeleteByIdAsync(long id)

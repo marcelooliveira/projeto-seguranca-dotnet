@@ -1,14 +1,14 @@
 ﻿@model MedVoll.Web.Dados.DadosCadastroMedico
 
 @{
-    var especialidades = ViewBag("Especialidades") as List<Especialidade>;
+    var especialidades = ViewData["Especialidades"] as List<Especialidade>;
 }
 
 <main class="container">
     <section class="card form-card">
         <h2 class="title">Cadastro de médico</h2>
 
-        <form method="post" asp-action="Salvar" asp-controller="Medicos">
+        <form method="post" asp-action="" asp-controller="Medicos">
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group">
@@ -50,9 +50,7 @@
             </div>
 
             <div class="buttons">
-                <button type="submit" class="btn btn-primary">
-                    <img src="~/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">Cadastrar
-                </button>
+                <input type="submit" class="btn btn-primary btn-with-icon" value="Cadastrar">
 
                 <a href="@Url.Action(" Listagem", "Medicos" )" class="btn btn-secondary">
                     <img src="~/assets/back.png" alt="Voltar" class="btn-icon">Voltar

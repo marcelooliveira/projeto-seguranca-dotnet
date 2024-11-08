@@ -31,7 +31,7 @@
                         <td>@consulta.Data.ToString("dd/MM/yyyy HH:mm")</td>
                         <td>@consulta.Especialidade</td>
                         <td>
-                            <a href="@Url.Action(" Formulario", "Consultas" , new { id=consulta.Id })" class="btn btn-icon" title="Editar">
+                            <a href="@Url.Action("Formulario", "Consultas" , new { id=consulta.Id })" class="btn btn-icon" title="Editar">
                                 <img src="~/assets/edit.svg" alt="Editar">
                             </a>
                             <a href="#deleteModal" class="btn btn-icon" data-toggle="modal" data-id="@consulta.Id" data-url="/consultas" title="Excluir">

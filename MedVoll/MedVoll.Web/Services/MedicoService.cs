@@ -29,7 +29,7 @@ namespace MedVoll.Web.Services
             if (dados.Id == null)
             {
                 var medico = new Medico(dados);
-                await _repository.SaveAsync(medico);
+                await _repository.InsertAsync(medico);
             }
             else
             {
@@ -37,7 +37,7 @@ namespace MedVoll.Web.Services
                 if (medico == null) throw new Exception("Médico não encontrado.");
 
                 medico.AtualizarDados(dados);
-                await _repository.SaveAsync(medico);
+                await _repository.UpdateAsync(medico);
             }
         }
 

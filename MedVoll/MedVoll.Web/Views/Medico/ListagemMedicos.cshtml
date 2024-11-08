@@ -5,7 +5,7 @@
             <h2 class="title">Listagem de médicos</h2>
 
             <div class="table-controls">
-                <a href="@Url.Action(" Formulario", "Medicos" )" class="btn btn-tertiary">
+                <a href="@Url.Action("Formulario", "Medicos" )" class="btn btn-tertiary">
                     <img src="~/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">
                     Novo Médico
                 </a>
@@ -31,7 +31,7 @@
                         <td>@medico.Crm</td>
                         <td>@medico.Especialidade</td>
                         <td>
-                            <a href="@Url.Action(" Formulario", "Medicos" , new { id=medico.Id })" class="btn btn-edit" title="Editar">
+                            <a href="@Url.Action("Formulario", "Medicos" , new { id=medico.Id })" class="btn btn-edit" title="Editar">
                                 <img src="~/assets/edit.svg" alt="Editar">
                             </a>
 

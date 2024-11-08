@@ -31,12 +31,12 @@ namespace MedVoll.Web.Dados
             this.Especialidade = Especialidade;
         }
 
-        public long? Id { get; }
-        public string Nome { get; }
-        public string Email { get; }
-        public string Telefone { get; }
-        public string Crm { get; }
-        public Especialidade Especialidade { get; }
+        public long? Id { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public string Crm { get; set; }
+        public Especialidade Especialidade { get; set; }
     }
 }
 

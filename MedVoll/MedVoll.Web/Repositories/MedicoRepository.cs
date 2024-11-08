@@ -26,9 +26,15 @@ namespace MedVoll.Web.Repositories
                 .ToListAsync();
         }
 
-        public async Task SaveAsync(Medico medico)
+        public async Task InsertAsync(Medico medico)
         {
             _context.Add(medico);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Medico medico)
+        {
+            _context.Update(medico);
             await _context.SaveChangesAsync();
         }
 

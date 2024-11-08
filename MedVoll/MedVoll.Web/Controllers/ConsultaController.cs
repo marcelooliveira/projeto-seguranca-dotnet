@@ -2,18 +2,15 @@
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
-using MedVoll.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MedVoll.Web.Controllers
 {
     [Route("consultas")]
-    public class ConsultaController : Controller
+    public class ConsultaController : BaseController
     {
         private const string PaginaListagem = "ListagemConsultas";
         private const string PaginaCadastro = "FormularioConsulta";
-        private const string RedirectListagem = "redirect:/consultas?sucesso";
 
         private readonly IConsultaService _service;
 
@@ -23,7 +20,7 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("{page?}")]
         public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
             var consultasAtivas = await _service.ListarAsync();
@@ -32,19 +29,20 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpGet]
-        [Route("formulario")]
+        [Route("formulario/{id}")]
         public async Task<IActionResult> CarregarPaginaAgendaConsultaAsync(long? id)
         {
             var dados = id.HasValue 
                 ? await _service.CarregarPorIdAsync(id.Value) 
                 : new DadosAgendamentoConsulta();
-            ViewBag.Dados = dados;
-            return View(PaginaCadastro);
+
+            //ViewData["Medicos"] = 
+            return View(PaginaCadastro, dados);
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([BindRequired] DadosAgendamentoConsulta dados)
+        public async Task<IActionResult> CadastrarAsync([FromForm] DadosAgendamentoConsulta dados)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +53,7 @@ namespace MedVoll.Web.Controllers
             try
             {
                 await _service.CadastrarAsync(dados);
-                return Redirect(RedirectListagem);
+                return Redirect("/consultas");
             }
             catch (RegraDeNegocioException ex)
             {
@@ -66,11 +64,11 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
+        [Route("{id}")]
         public async Task<IActionResult> ExcluirAsync(long id)
         {
             await _service.ExcluirAsync(id);
-            return Redirect(RedirectListagem);
+            return Redirect("/consultas");
         }
 
         [HttpGet]
