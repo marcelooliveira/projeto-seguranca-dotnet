@@ -40,7 +40,7 @@ namespace MedVoll.Web.Services
                 if (consulta == null) throw new Exception("Consulta não encontrada.");
 
                 consulta.ModificarDados(medicoConsulta, dados);
-                await _consultaRepository.SaveAsync(consulta);
+                await _consultaRepository.UpdateAsync(consulta);
             }
         }
 

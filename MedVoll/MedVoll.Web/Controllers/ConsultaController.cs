@@ -12,18 +12,20 @@ namespace MedVoll.Web.Controllers
         private const string PaginaListagem = "ListagemConsultas";
         private const string PaginaCadastro = "FormularioConsulta";
 
-        private readonly IConsultaService _service;
+        private readonly IConsultaService _consultaservice;
+        private readonly IMedicoService _medicoService;
 
-        public ConsultaController(IConsultaService consultaService)
+        public ConsultaController(IConsultaService consultaService, IMedicoService medicoService)
         {
-            _service = consultaService;
+            _consultaservice = consultaService;
+            _medicoService = medicoService;
         }
 
         [HttpGet]
         [Route("{page?}")]
         public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
-            var consultasAtivas = await _service.ListarAsync();
+            var consultasAtivas = await _consultaservice.ListarAsync();
             ViewBag.Consultas = consultasAtivas;
             return View(PaginaListagem, consultasAtivas);
         }
@@ -33,10 +35,10 @@ namespace MedVoll.Web.Controllers
         public async Task<IActionResult> CarregarPaginaAgendaConsultaAsync(long? id)
         {
             var dados = id.HasValue 
-                ? await _service.CarregarPorIdAsync(id.Value) 
+                ? await _consultaservice.CarregarPorIdAsync(id.Value) 
                 : new DadosAgendamentoConsulta();
 
-            //ViewData["Medicos"] = 
+            ViewData["Medicos"] = await _medicoService.ListarAsync();
             return View(PaginaCadastro, dados);
         }
 
@@ -52,7 +54,7 @@ namespace MedVoll.Web.Controllers
 
             try
             {
-                await _service.CadastrarAsync(dados);
+                await _consultaservice.CadastrarAsync(dados);
                 return Redirect("/consultas");
             }
             catch (RegraDeNegocioException ex)
@@ -67,7 +69,7 @@ namespace MedVoll.Web.Controllers
         [Route("{id}")]
         public async Task<IActionResult> ExcluirAsync(long id)
         {
-            await _service.ExcluirAsync(id);
+            await _consultaservice.ExcluirAsync(id);
             return Redirect("/consultas");
         }
 

@@ -8,6 +8,7 @@ namespace MedVoll.Web.Interfaces
         Task SaveAsync(Consulta consulta);
         Task<Consulta> FindByIdAsync(long id);
         Task DeleteByIdAsync(long id);
+        Task UpdateAsync(Consulta consulta);
     }
 }
 

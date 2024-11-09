@@ -24,11 +24,11 @@ namespace MedVoll.Web.Dados
             this.Especialidade = Especialidade;
         }
 
-        public long? Id { get; }
-        public long IdMedico { get; }
-        public string Paciente { get; }
-        public DateTime Data { get; }
-        public Especialidade Especialidade { get; }
+        public long? Id { get; set; }
+        public long IdMedico { get; set; }
+        public string Paciente { get; set; }
+        public DateTime Data { get; set; }
+        public Especialidade Especialidade { get; set; }
     }
 }
 
