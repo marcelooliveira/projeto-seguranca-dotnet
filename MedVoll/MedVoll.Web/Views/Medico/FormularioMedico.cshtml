@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label asp-for="Especialidade">Especialidade</label>
                 <select asp-for="Especialidade" class="form-control" >
-                    <option value="">Selecione uma especialidade</option>
+                    <option value="">[SELECIONE UMA ESPECIALIDADE]</option>
                     @foreach (var especialidade in especialidades)
                     {
                     <option value="@especialidade">
@@ -47,7 +47,7 @@
                     </option>
                     }
                 </select>
-                <div class="text-danger" asp-validation-for="Especialidade"></div>
+                <span asp-validation-for="Especialidade" class="text-danger"></span>
             </div>
 
             <div class="buttons">
@@ -55,7 +55,7 @@
                     <img src="/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">Cadastrar
                 </button>
 
-                <a href="@Url.Action(" Listagem", "Medicos" )" class="btn btn-secondary">
+                <a href="@Url.Action("Listagem", "Medicos" )" class="btn btn-secondary">
                     <img src="~/assets/back.png" alt="Voltar" class="btn-icon">Voltar
                 </a>
             </div>

@@ -28,7 +28,7 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpGet]
-        [Route("formulario/{id}")]
+        [Route("formulario/{id?}")]
         public async Task<IActionResult> CarregarPaginaCadastroAsync(long? id)
         {
             var dados = id.HasValue 
@@ -40,12 +40,11 @@ namespace MedVoll.Web.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([BindRequired][FromForm] DadosCadastroMedico dados)
+        public async Task<IActionResult> CadastrarAsync([FromForm] DadosCadastroMedico dados)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Dados = dados;
-                return View(PaginaCadastro);
+                return View(PaginaCadastro, dados);
             }
 
             try

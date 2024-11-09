@@ -22,15 +22,16 @@ namespace MedVoll.Web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; private set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório"), StringLength(11, MinimumLength =11, ErrorMessage = "CPF deve ter 11 digitos")]
         public string Paciente { get; private set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório")]
         public long MedicoId { get; private set; }
 
-
+        [Required(ErrorMessage = "Campo obrigatório")]
         public DateTime Data { get; private set; }
 
+        [Required(ErrorMessage = "Campo obrigatório")]
         public virtual Medico Medico { get; private set; }
 
         public Consulta() { }

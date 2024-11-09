@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="especialidade">Especialidade</label>
                 <select asp-for="Especialidade" class="form-control" required>
-                    <option value="">Selecione uma especialidade</option>
+                    <option value="">[SELECIONE UMA ESPECIALIDADE]</option>
                     @foreach (var especialidade in especialidades)
                     {
                         <option value="@especialidade">@especialidade</option>
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="cpf">CPF do Paciente</label>
-                <input asp-for="Paciente" type="text" class="form-control" placeholder="Digite o CPF do paciente" required />
+                <input asp-for="Paciente" type="number" class="form-control" placeholder="Digite o CPF do paciente" required />
                 <span asp-validation-for="Paciente" class="text-danger"></span>
             </div>
 

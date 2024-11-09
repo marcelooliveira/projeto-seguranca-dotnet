@@ -26,11 +26,14 @@ namespace MedVoll.Web.Dados
         }
 
         public long? Id { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
         public long IdMedico { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obrigatório"), StringLength(11, MinimumLength = 11, ErrorMessage = "CPF deve ter 11 digitos")]
         public string Paciente { get; set; }
-        [Required, DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Campo obrigatório"), DataType(DataType.DateTime)]
         public DateTime Data { get; set; }
+        [Required(ErrorMessage = "Campo obrigatório")]
         public Especialidade Especialidade { get; set; }
     }
 }

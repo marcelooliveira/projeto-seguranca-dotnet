@@ -31,16 +31,16 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpGet]
-        [Route("formulario/{id}")]
+        [Route("formulario/{id?}")]
         public async Task<IActionResult> CarregarPaginaAgendaConsultaAsync(long? id)
         {
-            var dados = id.HasValue 
-                ? await _consultaservice.CarregarPorIdAsync(id.Value) 
-                : new DadosAgendamentoConsulta();
+            var dados = id.HasValue
+                ? await _consultaservice.CarregarPorIdAsync(id.Value)
+                : new DadosAgendamentoConsulta { Data = DateTime.Now };
 
-            ViewData["Medicos"] = await _medicoService.ListarAsync();
-            return View(PaginaCadastro, dados);
+            return await GetViewPaginaCadastro(dados);
         }
+
 
         [HttpPost]
         [Route("")]
@@ -48,8 +48,7 @@ namespace MedVoll.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Dados = dados;
-                return View(PaginaCadastro);
+                return await GetViewPaginaCadastro(dados);
             }
 
             try
@@ -63,6 +62,13 @@ namespace MedVoll.Web.Controllers
                 ViewBag.Dados = dados;
                 return View(PaginaCadastro);
             }
+        }
+
+        private async Task<ViewResult> GetViewPaginaCadastro(DadosAgendamentoConsulta dados)
+        {
+            ViewData["Medicos"] = await _medicoService.ListarAsync();
+            ViewResult viewPaginaCadastro = View(PaginaCadastro, dados);
+            return viewPaginaCadastro;
         }
 
         [HttpDelete]
