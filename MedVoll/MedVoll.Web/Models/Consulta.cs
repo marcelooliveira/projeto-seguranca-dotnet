@@ -11,7 +11,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using MedVoll.Web.Dados;
+using MedVoll.Web.Dtos;
 
 namespace MedVoll.Web.Models
 {
@@ -36,12 +36,14 @@ namespace MedVoll.Web.Models
 
         public Consulta() { }
 
-        public Consulta(Medico medico, DadosAgendamentoConsulta dados)
+        //public Consulta(Medico medico, DadosAgendamentoConsulta dados)
+        public Consulta(Medico medico, ConsultaDto dados)
         {
             ModificarDados(medico, dados);
         }
 
-        public void ModificarDados(Medico medico, DadosAgendamentoConsulta dados)
+        //public void ModificarDados(Medico medico, DadosAgendamentoConsulta dados)
+        public void ModificarDados(Medico medico, ConsultaDto dados)
         {
             Medico = medico;
             Paciente = dados.Paciente;

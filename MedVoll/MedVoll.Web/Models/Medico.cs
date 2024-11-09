@@ -1,4 +1,4 @@
-﻿using MedVoll.Web.Dados;
+﻿using MedVoll.Web.Dtos;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,12 +30,14 @@ namespace MedVoll.Web.Models
 
         public Medico() { }
 
-        public Medico(DadosCadastroMedico dados)
+        //public Medico(DadosCadastroMedico dados)
+        public Medico(MedicoDto dados)
         {
             AtualizarDados(dados);
         }
 
-        public void AtualizarDados(DadosCadastroMedico dados)
+        //public void AtualizarDados(DadosCadastroMedico dados)
+        public void AtualizarDados(MedicoDto dados)
         {
             Nome = dados.Nome;
             Email = dados.Email;

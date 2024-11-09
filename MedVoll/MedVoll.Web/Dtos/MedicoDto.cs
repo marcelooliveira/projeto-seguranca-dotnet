@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace MedVoll.Web.Dados
+namespace MedVoll.Web.Dtos
 {
-    public class DadosCadastroMedico
+    public class MedicoDto
     {
-        public DadosCadastroMedico()
+        public MedicoDto()
         {
         }
 
-        public DadosCadastroMedico(Medico medico)
+        public MedicoDto(Medico medico)
         {
             Id = medico.Id;
             Nome = medico.Nome;

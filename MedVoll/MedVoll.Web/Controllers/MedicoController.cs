@@ -1,4 +1,4 @@
-﻿using MedVoll.Web.Dados;
+﻿using MedVoll.Web.Dtos;
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
@@ -33,14 +33,16 @@ namespace MedVoll.Web.Controllers
         {
             var dados = id.HasValue 
                 ? await _service.CarregarPorIdAsync(id.Value) 
-                : new DadosCadastroMedico();
+                //: new DadosCadastroMedico();
+                : new MedicoDto();
 
             return View(PaginaCadastro, dados);
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([FromForm] DadosCadastroMedico dados)
+        //public async Task<IActionResult> CadastrarAsync([FromForm] DadosCadastroMedico dados)
+        public async Task<IActionResult> CadastrarAsync([FromForm] MedicoDto dados)
         {
             if (!ModelState.IsValid)
             {
