@@ -61,7 +61,7 @@ namespace MedVoll.Web.Migrations
 
                     b.Property<int>("Especialidade")
                         .HasMaxLength(100)
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()

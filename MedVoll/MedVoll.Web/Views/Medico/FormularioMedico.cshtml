@@ -9,35 +9,36 @@
         <h2 class="title">Cadastro de médico</h2>
 
         <form method="post" asp-action="" asp-controller="Medicos">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group">
                 <label asp-for="Nome">Nome:</label>
-                <input asp-for="Nome" class="form-control" required />
-                <div class="alert alert-danger" asp-validation-for="Nome"></div>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Email">Email:</label>
-                <input asp-for="Email" class="form-control" required />
-                <div class="alert alert-danger" asp-validation-for="Email"></div>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Telefone">Telefone:</label>
-                <input asp-for="Telefone" class="form-control" required />
-                <div class="alert alert-danger" asp-validation-for="Telefone"></div>
+                <input asp-for="Telefone" class="form-control" placeholder="(  )    -" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Crm">CRM:</label>
-                <input asp-for="Crm" class="form-control" required />
-                <div class="alert alert-danger" asp-validation-for="Crm"></div>
+                <label asp-for="Crm" class="control-label">CRM:</label>
+                <input asp-for="Crm" class="form-control" />
+                <span asp-validation-for="Crm" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Especialidade">Especialidade</label>
-                <select asp-for="Especialidade" class="form-control" required>
+                <select asp-for="Especialidade" class="form-control" >
                     <option value="">Selecione uma especialidade</option>
                     @foreach (var especialidade in especialidades)
                     {
@@ -46,11 +47,13 @@
                     </option>
                     }
                 </select>
-                <div class="alert alert-danger" asp-validation-for="Especialidade"></div>
+                <div class="text-danger" asp-validation-for="Especialidade"></div>
             </div>
 
             <div class="buttons">
-                <input type="submit" class="btn btn-primary btn-with-icon" value="Cadastrar">
+                <button type="submit" class="btn btn-primary">
+                    <img src="/assets/plus.png" alt="Ícone de adicionar" class="btn-icon">Cadastrar
+                </button>
 
                 <a href="@Url.Action(" Listagem", "Medicos" )" class="btn btn-secondary">
                     <img src="~/assets/back.png" alt="Voltar" class="btn-icon">Voltar

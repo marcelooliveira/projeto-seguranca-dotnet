@@ -18,7 +18,7 @@ namespace MedVoll.Web.Services
         public async Task<IEnumerable<DadosListagemConsulta>> ListarAsync()
         {
             var consultas = await _consultaRepository.GetAllOrderedByDataAsync();
-            return consultas.Select(c => new DadosListagemConsulta(c));
+            return consultas.Select(c => new DadosListagemConsulta(c)).ToList();
         }
 
         public async Task CadastrarAsync(DadosAgendamentoConsulta dados)

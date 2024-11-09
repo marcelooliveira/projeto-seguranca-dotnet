@@ -13,9 +13,9 @@ namespace MedVoll.Web.Repositories
             _context = context;
         }
 
-        public async Task<IQueryable<Consulta>> GetAllOrderedByDataAsync()
+        public async Task<IEnumerable<Consulta>> GetAllOrderedByDataAsync()
         {
-            return _context.Consultas.Include(c => c.Medico).OrderBy(c => c.Data).AsQueryable();
+            return _context.Consultas.Include(c => c.Medico).OrderBy(c => c.Data).AsEnumerable();
         }
 
         public async Task SaveAsync(Consulta consulta)

@@ -19,7 +19,7 @@ namespace MedVoll.Web.Repositories
                 .AnyAsync(m => (m.Email == email || m.Crm == crm) && (!id.HasValue || m.Id != id));
         }
 
-        public async Task<List<Medico>> FindByEspecialidadeAsync(Especialidade especialidade)
+        public async Task<IEnumerable<Medico>> FindByEspecialidadeAsync(Especialidade especialidade)
         {
             return await _context.Medicos
                 .Where(m => m.Especialidade == especialidade)
@@ -53,9 +53,9 @@ namespace MedVoll.Web.Repositories
             }
         }
 
-        public async Task<IQueryable<Medico>> GetAllAsync()
+        public async Task<IEnumerable<Medico>> GetAllAsync()
         {
-            return _context.Medicos.AsQueryable();
+            return _context.Medicos.AsEnumerable();
         }
     }
 }

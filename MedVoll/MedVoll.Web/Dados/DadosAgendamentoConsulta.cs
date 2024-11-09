@@ -12,8 +12,9 @@ namespace MedVoll.Web.Dados
         public DadosAgendamentoConsulta(
             long? Id,
             long IdMedico,
-            [Required] string Paciente,
-            [Required, DataType(DataType.DateTime)] DateTime Data,
+            string Paciente,
+            
+            DateTime Data,
             Especialidade Especialidade
         )
         {
@@ -26,7 +27,9 @@ namespace MedVoll.Web.Dados
 
         public long? Id { get; set; }
         public long IdMedico { get; set; }
+        [Required]
         public string Paciente { get; set; }
+        [Required, DataType(DataType.DateTime)]
         public DateTime Data { get; set; }
         public Especialidade Especialidade { get; set; }
     }

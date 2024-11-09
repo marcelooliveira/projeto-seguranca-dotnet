@@ -5,12 +5,12 @@ namespace MedVoll.Web.Interfaces
     public interface IMedicoRepository
     {
         Task<bool> IsJaCadastradoAsync(string email, string crm, long? id);
-        Task<List<Medico>> FindByEspecialidadeAsync(Especialidade especialidade);
+        Task<IEnumerable<Medico>> FindByEspecialidadeAsync(Especialidade especialidade);
         Task InsertAsync(Medico medico);
         Task UpdateAsync(Medico medico);
         Task<Medico> FindByIdAsync(long id);
         Task DeleteByIdAsync(long id);
-        Task<IQueryable<Medico>> GetAllAsync();
+        Task<IEnumerable<Medico>> GetAllAsync();
     }
 }
 

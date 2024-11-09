@@ -15,9 +15,9 @@ namespace MedVoll.Web.Migrations
                 columnTypes: new[] { "string", "string", "string", "string", "string" }, 
                 values: new object[,]
                 {
-                { "Gregory House", "house@hospital.com", "123-456-7890", "123456", "Diagnóstico" },
-                { "Meredith Grey", "meredith@hospital.com", "123-456-7891", "654321", "Cirurgia Geral" },
-                { "John Carter", "carter@hospital.com", "123-456-7892", "234567", "Emergência" },
+                { "Gregory House", "house@hospital.com", "(12)12345-6781", "123456", "ORTOPEDIA" },
+                { "Meredith Grey", "meredith@hospital.com", "(12)12345-6782", "654321", "CARDIOLOGIA" },
+                { "John Carter", "carter@hospital.com", "(12)12345-6783", "234567", "GINECOLOGIA" },
                     // Adicione mais 17 registros fictícios
                 });
 

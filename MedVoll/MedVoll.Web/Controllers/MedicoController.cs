@@ -3,6 +3,7 @@ using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MedVoll.Web.Controllers
 {
@@ -39,7 +40,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([FromForm] DadosCadastroMedico dados)
+        public async Task<IActionResult> CadastrarAsync([BindRequired][FromForm] DadosCadastroMedico dados)
         {
             if (!ModelState.IsValid)
             {
@@ -69,7 +70,7 @@ namespace MedVoll.Web.Controllers
         }
 
         [HttpGet]
-        [Route("{especialidade}")]
+        [Route("especialidade/{especialidade}")]
         public async Task<IActionResult> ListarMedicosPorEspecialidadeAsync(string especialidade)
         {
             if (Enum.TryParse(especialidade, out Especialidade especEnum))

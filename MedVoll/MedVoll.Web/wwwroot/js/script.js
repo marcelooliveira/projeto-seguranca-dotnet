@@ -19,9 +19,9 @@ $('#updateModal').on('show.bs.modal', function (e) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const especialidadeSelect = document.getElementById('especialidade');
+    const especialidadeSelect = document.getElementById('Especialidade');
     if (especialidadeSelect) {
-        const medicoSelect = document.getElementById('idMedico');
+        const medicoSelect = document.getElementById('IdMedico');
 
         especialidadeSelect.addEventListener('change', function() {
             const especialidade = especialidadeSelect.value;
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             medicoSelect.innerHTML = '<option value="">Selecione um médico</option>';
 
             if (especialidade) {
-                fetch('/medicos/' + especialidade)
+                fetch('/medicos/especialidade/' + especialidade)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');

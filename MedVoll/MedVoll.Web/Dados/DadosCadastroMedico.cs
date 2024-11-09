@@ -1,5 +1,6 @@
 ﻿using MedVoll.Web.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace MedVoll.Web.Dados
 {
@@ -7,35 +8,30 @@ namespace MedVoll.Web.Dados
     {
         public DadosCadastroMedico()
         {
-                
         }
 
-        public DadosCadastroMedico(
-            long? Id,
-            [Required, MinLength(1)]
-            string Nome,
-            [Required, EmailAddress]
-            string Email,
-            [Required, MinLength(1)]
-            string Telefone,
-            [Required, RegularExpression(@"^\d{4,6}$", ErrorMessage = "CRM deve ter de 4 a 6 digitos numéricos")]
-            string Crm,
-            [Required]
-            Especialidade Especialidade)
+        public DadosCadastroMedico(Medico medico)
         {
-            this.Id = Id;
-            this.Nome = Nome;
-            this.Email = Email;
-            this.Telefone = Telefone;
-            this.Crm = Crm;
-            this.Especialidade = Especialidade;
+            Id = medico.Id;
+            Nome = medico.Nome;
+            Email = medico.Email;
+            Telefone = medico.Telefone;
+            Crm = medico.Crm;
+            Especialidade = medico.Especialidade;
         }
 
         public long? Id { get; set; }
+        [Required(ErrorMessage = "Campo obrigatório"), MinLength(1)]
         public string Nome { get; set; }
+        [Required, EmailAddress]
         public string Email { get; set; }
-        public string Telefone { get; set; }
+        [Required, StringLength(6, MinimumLength = 4,
+            ErrorMessage = "CRM deve ter de 4 a 6 digitos numéricos")]
         public string Crm { get; set; }
+        [Required, RegularExpression(@"^(?:\d{8}|\d{9}|\d{4}-\d{4}|\d{5}-\d{4}|\(\d{2}\)\s*\d{4}-\d{4}|\(\d{2}\)\s*\d{5}-\d{4}|\(\d{2}\)\s*\d{9})$",
+            ErrorMessage = "Telefone inválido")]
+        public string Telefone { get; set; }
+        [Required]
         public Especialidade Especialidade { get; set; }
     }
 }

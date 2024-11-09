@@ -46,7 +46,7 @@ namespace MedVoll.Web.Services
             var medico = await _repository.FindByIdAsync(id);
             if (medico == null) throw new Exception("Médico não encontrado.");
 
-            return new DadosCadastroMedico(medico.Id, medico.Nome, medico.Email, medico.Telefone, medico.Crm, medico.Especialidade);
+            return new DadosCadastroMedico(medico);
         }
 
         public async Task ExcluirAsync(long id)
