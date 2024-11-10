@@ -30,7 +30,7 @@
                         <td>@medico.Nome</td>
                         <td>@medico.Email</td>
                         <td>@medico.Crm</td>
-                        <td>@medico.Especialidade</td>
+                        <td>@medico.Especialidade.GetDisplayName()</td>
                         <td>
                             <a href="@Url.Action("Formulario", "Medicos" , new { id=medico.Id })" class="btn btn-edit" title="Editar">
                                 <img src="~/assets/edit.svg" alt="Editar">

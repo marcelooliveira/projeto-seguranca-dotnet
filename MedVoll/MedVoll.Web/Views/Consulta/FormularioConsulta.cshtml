@@ -20,7 +20,7 @@
                     <option value="">[SELECIONE UMA ESPECIALIDADE]</option>
                     @foreach (var especialidade in especialidades)
                     {
-                        <option value="@especialidade">@especialidade</option>
+                        <option value="@especialidade">@especialidade.GetDisplayName()</option>
                     }
                 </select>
                 <span asp-validation-for="Especialidade" class="text-danger"></span>
