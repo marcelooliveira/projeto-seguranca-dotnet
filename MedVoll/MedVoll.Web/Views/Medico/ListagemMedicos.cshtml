@@ -45,24 +45,7 @@
                 </tbody>
             </table>
 
-            <!-- Componente de paginação -->
-            @* @await Html.PartialAsync("_paginacao", new PaginacaoViewModel { Url = "medicos", Registros = Model }) *@
-
-        @{
-            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-        }
-
-        <a asp-action="Index" asp-controller="Medicos"
-           asp-route-page="@(Model.PageIndex - 1)"
-           class="btn btn-default @prevDisabled">
-            Previous
-        </a>
-        <a asp-action="Index" asp-controller="Medicos"
-           asp-route-page="@(Model.PageIndex + 1)"
-           class="btn btn-default @nextDisabled">
-            Next
-        </a>
+            @await Html.PartialAsync("_paginacao", Model)
         </section>
     </main>
 

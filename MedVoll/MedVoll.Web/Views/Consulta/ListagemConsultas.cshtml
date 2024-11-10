@@ -43,8 +43,7 @@
                 }
             </tbody>
         </table>
-
-        @* @await Html.PartialAsync("_paginacao", new { url = "consultas", registros = Model.Consultas }) *@
+        @await Html.PartialAsync("_paginacao", Model)
     </section>
 </main>
 

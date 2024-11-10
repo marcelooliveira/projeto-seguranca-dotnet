@@ -27,6 +27,7 @@ namespace MedVoll.Web.Controllers
         {
             var consultasAtivas = await _consultaservice.ListarAsync(page);
             ViewBag.Consultas = consultasAtivas;
+            ViewData["Url"] = "Consultas";
             return View(PaginaListagem, consultasAtivas);
         }
 
@@ -37,8 +38,9 @@ namespace MedVoll.Web.Controllers
             var dados = id.HasValue
                 ? await _consultaservice.CarregarPorIdAsync(id.Value)
                 : new ConsultaDto { Data = DateTime.Now };
-
-            return await GetViewPaginaCadastro(dados);
+            IEnumerable<MedicoDto> medicos = await _medicoService.ListarTodosAsync();
+            ViewData["Medicos"] = medicos.ToList();
+            return View(PaginaCadastro, dados);
         }
 
 
@@ -49,12 +51,14 @@ namespace MedVoll.Web.Controllers
             if (dados._method == "delete")
             {
                 await _consultaservice.ExcluirAsync(dados.Id.Value);
-                return Redirect("/medicos");
+                return Redirect("/consultas");
             }
 
             if (!ModelState.IsValid)
             {
-                return await GetViewPaginaCadastro(dados);
+                IEnumerable<MedicoDto> medicos = await _medicoService.ListarTodosAsync();
+                ViewData["Medicos"] = medicos.ToList();
+                return View(PaginaCadastro, dados);
             }
 
             try
@@ -68,13 +72,6 @@ namespace MedVoll.Web.Controllers
                 ViewBag.Dados = dados;
                 return View(PaginaCadastro);
             }
-        }
-
-        private async Task<ViewResult> GetViewPaginaCadastro(ConsultaDto dados)
-        {
-            ViewData["Medicos"] = await _medicoService.ListarTodosAsync();
-            ViewResult viewPaginaCadastro = View(PaginaCadastro, dados);
-            return viewPaginaCadastro;
         }
 
         [HttpGet]

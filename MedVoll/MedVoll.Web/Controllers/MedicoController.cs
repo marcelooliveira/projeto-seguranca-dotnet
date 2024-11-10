@@ -24,6 +24,7 @@ namespace MedVoll.Web.Controllers
         public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
             var medicosCadastrados = await _service.ListarAsync(page);
+            ViewData["Url"] = "Medicos";
             return View(PaginaListagem, medicosCadastrados);
         }
 
@@ -45,7 +46,7 @@ namespace MedVoll.Web.Controllers
             if (dados._method == "delete")
             {
                 await _service.ExcluirAsync(dados.Id.Value);
-                return Redirect("/consultas");
+                return Redirect("/medicos");
             }
 
             if (!ModelState.IsValid)
