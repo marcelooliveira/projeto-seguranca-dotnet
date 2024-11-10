@@ -1,6 +1,5 @@
 ﻿using MedVoll.Web.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace MedVoll.Web.Dtos
 {

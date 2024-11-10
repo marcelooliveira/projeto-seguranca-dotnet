@@ -13,6 +13,7 @@
         <h2 class="title">Agendamento de Consultas</h2>
 
         <form method="post" asp-action="" asp-controller="Consultas">
+            <input type="hidden" name="_method" value="post">
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group">

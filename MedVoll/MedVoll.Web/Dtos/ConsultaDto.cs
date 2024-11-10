@@ -1,7 +1,6 @@
 ﻿using MedVoll.Web.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace MedVoll.Web.Dtos
 {
@@ -29,12 +28,12 @@ namespace MedVoll.Web.Dtos
 
         public ConsultaDto(Consulta consulta)
         {
-            this.Id = consulta.Id;
-            this.IdMedico = consulta.MedicoId;
-            this.MedicoNome = consulta.Medico.Nome;
-            this.Paciente = consulta.Paciente;
-            this.Data = consulta.Data;
-            this.Especialidade = consulta.Medico.Especialidade;
+            Id = consulta.Id;
+            IdMedico = consulta.MedicoId;
+            MedicoNome = consulta.Medico.Nome;
+            Paciente = consulta.Paciente;
+            Data = consulta.Data;
+            Especialidade = consulta.Medico.Especialidade;
         }
 
         public long? Id { get; set; }
