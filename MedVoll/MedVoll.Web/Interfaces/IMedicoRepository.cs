@@ -10,7 +10,7 @@ namespace MedVoll.Web.Interfaces
         Task UpdateAsync(Medico medico);
         Task<Medico> FindByIdAsync(long id);
         Task DeleteByIdAsync(long id);
-        Task<IEnumerable<Medico>> GetAllAsync();
+        Task<IQueryable<Medico>> GetAllAsync();
     }
 }
 

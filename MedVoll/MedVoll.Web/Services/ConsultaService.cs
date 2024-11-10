@@ -8,6 +8,7 @@ namespace MedVoll.Web.Services
     {
         private readonly IConsultaRepository _consultaRepository;
         private readonly IMedicoRepository _medicoRepository;
+        private const int PageSize = 5;
 
         public ConsultaService(IConsultaRepository consultaRepository, IMedicoRepository medicoRepository)
         {
@@ -15,10 +16,11 @@ namespace MedVoll.Web.Services
             _medicoRepository = medicoRepository;
         }
 
-        public async Task<IEnumerable<ConsultaDto>> ListarAsync()
+        public async Task<PaginatedList<ConsultaDto>> ListarAsync(int? page)
         {
             var consultas = await _consultaRepository.GetAllOrderedByDataAsync();
-            return consultas.Select(c => new ConsultaDto(c)).ToList();
+            IQueryable<ConsultaDto> dtos = consultas.Select(m => new ConsultaDto(m));
+            return await PaginatedList<ConsultaDto>.CreateAsync(dtos, page ?? 1, PageSize);
         }
 
         public async Task CadastrarAsync(ConsultaDto dados)

@@ -23,7 +23,7 @@ namespace MedVoll.Web.Controllers
         [Route("{page?}")]
         public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
-            var medicosCadastrados = await _service.ListarAsync();
+            var medicosCadastrados = await _service.ListarAsync(page);
             return View(PaginaListagem, medicosCadastrados);
         }
 

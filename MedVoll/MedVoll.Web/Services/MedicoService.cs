@@ -7,16 +7,24 @@ namespace MedVoll.Web.Services
     public class MedicoService : IMedicoService
     {
         private readonly IMedicoRepository _repository;
+        private const int PageSize = 5;
 
         public MedicoService(IMedicoRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<IEnumerable<MedicoDto>> ListarAsync()
+        public async Task<PaginatedList<MedicoDto>> ListarAsync(int? page)
         {
             var medicos = await _repository.GetAllAsync();
-            return medicos.Select(m => new MedicoDto(m)).ToList();
+            IQueryable<MedicoDto> dtos = medicos.Select(m => new MedicoDto(m));
+            return await PaginatedList<MedicoDto>.CreateAsync(dtos, page ?? 1, PageSize);
+        }
+
+        public async Task<IEnumerable<MedicoDto>> ListarTodosAsync()
+        {
+            var medicos = await _repository.GetAllAsync();
+            return medicos.Select(m => new MedicoDto(m)).AsEnumerable();
         }
 
         public async Task CadastrarAsync(MedicoDto dados)

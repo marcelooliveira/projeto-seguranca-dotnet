@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MedVoll.Web.Dtos.ConsultaDto>
+﻿@using MedVoll.Web.Dtos;
+@model PaginatedList<MedVoll.Web.Dtos.ConsultaDto>
 
 <main class="container">
     <section class="card">
@@ -43,7 +44,7 @@
             </tbody>
         </table>
 
-        @* @await Html.PartialAsync("componentes/_paginacao", new { url = "consultas", registros = Model.Consultas }) *@
+        @* @await Html.PartialAsync("_paginacao", new { url = "consultas", registros = Model.Consultas }) *@
     </section>
 </main>
 

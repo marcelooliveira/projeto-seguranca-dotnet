@@ -7,6 +7,6 @@ namespace MedVoll.Web.Interfaces
         Task CadastrarAsync(ConsultaDto dados);
         Task<ConsultaDto> CarregarPorIdAsync(long id);
         Task ExcluirAsync(long id);
-        Task<IEnumerable<ConsultaDto>> ListarAsync();
+        Task<PaginatedList<ConsultaDto>> ListarAsync(int? page);
     }
 }

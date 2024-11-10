@@ -25,7 +25,7 @@ namespace MedVoll.Web.Controllers
         [Route("{page?}")]
         public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
         {
-            var consultasAtivas = await _consultaservice.ListarAsync();
+            var consultasAtivas = await _consultaservice.ListarAsync(page);
             ViewBag.Consultas = consultasAtivas;
             return View(PaginaListagem, consultasAtivas);
         }
@@ -72,7 +72,7 @@ namespace MedVoll.Web.Controllers
 
         private async Task<ViewResult> GetViewPaginaCadastro(ConsultaDto dados)
         {
-            ViewData["Medicos"] = await _medicoService.ListarAsync();
+            ViewData["Medicos"] = await _medicoService.ListarTodosAsync();
             ViewResult viewPaginaCadastro = View(PaginaCadastro, dados);
             return viewPaginaCadastro;
         }

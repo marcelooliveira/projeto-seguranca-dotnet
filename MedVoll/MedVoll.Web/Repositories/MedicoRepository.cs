@@ -53,9 +53,9 @@ namespace MedVoll.Web.Repositories
             }
         }
 
-        public async Task<IEnumerable<Medico>> GetAllAsync()
+        public async Task<IQueryable<Medico>> GetAllAsync()
         {
-            return _context.Medicos.AsEnumerable();
+            return _context.Medicos.AsQueryable();
         }
     }
 }
