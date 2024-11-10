@@ -1,10 +1,8 @@
 ﻿@using MedVoll.Web.Dtos;
-@* @model MedVoll.Web.Dtos.DadosAgendamentoConsulta *@
 @model MedVoll.Web.Dtos.ConsultaDto
 @{
     ViewData["Title"] = "Agendamento de Consultas";
     var especialidades = ViewData["Especialidades"] as List<Especialidade>;
-    // var medicos = ViewData["Medicos"] as List<DadosListagemMedico>;
     var medicos = ViewData["Medicos"] as List<MedicoDto>;
 }
 

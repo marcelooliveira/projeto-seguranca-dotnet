@@ -1,5 +1,4 @@
-﻿@* @model IEnumerable<MedVoll.Web.Dados.DadosListagemConsulta> *@
-@model IEnumerable<MedVoll.Web.Dtos.ConsultaDto>
+﻿@model IEnumerable<MedVoll.Web.Dtos.ConsultaDto>
 
 <main class="container">
     <section class="card">
@@ -27,7 +26,6 @@
                 @foreach (var consulta in Model)
                 {
                     <tr>
-                        @* <td>@consulta.Medico</td> *@
                         <td>@consulta.MedicoNome</td>
                         <td>@consulta.Paciente</td>
                         <td>@consulta.Data.ToString("dd/MM/yyyy HH:mm")</td>

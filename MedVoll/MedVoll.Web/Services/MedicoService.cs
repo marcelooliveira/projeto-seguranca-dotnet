@@ -13,15 +13,12 @@ namespace MedVoll.Web.Services
             _repository = repository;
         }
 
-        //public async Task<IEnumerable<DadosListagemMedico>> ListarAsync()
         public async Task<IEnumerable<MedicoDto>> ListarAsync()
         {
             var medicos = await _repository.GetAllAsync();
-            //return medicos.Select(m => new DadosListagemMedico(m)).ToList();
             return medicos.Select(m => new MedicoDto(m)).ToList();
         }
 
-        //public async Task CadastrarAsync(DadosCadastroMedico dados)
         public async Task CadastrarAsync(MedicoDto dados)
         {
             if (await _repository.IsJaCadastradoAsync(dados.Email, dados.Crm, dados.Id))
@@ -44,13 +41,11 @@ namespace MedVoll.Web.Services
             }
         }
 
-        //public async Task<DadosCadastroMedico> CarregarPorIdAsync(long id)
         public async Task<MedicoDto> CarregarPorIdAsync(long id)
         {
             var medico = await _repository.FindByIdAsync(id);
             if (medico == null) throw new Exception("Médico não encontrado.");
 
-            //return new DadosCadastroMedico(medico);
             return new MedicoDto(medico);
         }
 
@@ -59,11 +54,9 @@ namespace MedVoll.Web.Services
             await _repository.DeleteByIdAsync(id);
         }
 
-        //public async Task<IEnumerable<DadosListagemMedico>> ListarPorEspecialidadeAsync(Especialidade especialidade)
         public async Task<IEnumerable<MedicoDto>> ListarPorEspecialidadeAsync(Especialidade especialidade)
         {
             var medicos = await _repository.FindByEspecialidadeAsync(especialidade);
-            //return medicos.Select(m => new DadosListagemMedico(m)).ToList();
             return medicos.Select(m => new MedicoDto(m)).ToList();
         }
     }
