@@ -2,7 +2,6 @@
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
-using MedVoll.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedVoll.Web.Controllers
@@ -10,8 +9,8 @@ namespace MedVoll.Web.Controllers
     [Route("medicos")]
     public class MedicoController : BaseController
     {
-        private const string PaginaListagem = "ListagemMedicos";
-        private const string PaginaCadastro = "FormularioMedico";
+        private const string PaginaListagem = "Listagem";
+        private const string PaginaCadastro = "Formulario";
         private readonly IMedicoService _service;
 
         public MedicoController(IMedicoService service)
@@ -21,7 +20,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("{page?}")]
-        public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
+        public async Task<IActionResult> ListarAsync([FromQuery] int page = 1)
         {
             var medicosCadastrados = await _service.ListarAsync(page);
             ViewData["Url"] = "Medicos";
@@ -30,7 +29,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("formulario/{id?}")]
-        public async Task<IActionResult> CarregarPaginaCadastroAsync(long? id)
+        public async Task<IActionResult> ObterFormularioAsync(long? id)
         {
             var dados = id.HasValue 
                 ? await _service.CarregarPorIdAsync(id.Value) 
@@ -41,7 +40,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([FromForm] MedicoDto dados)
+        public async Task<IActionResult> SalvarAsync([FromForm] MedicoDto dados)
         {
             if (dados._method == "delete")
             {
@@ -69,7 +68,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("especialidade/{especialidade}")]
-        public async Task<IActionResult> ListarMedicosPorEspecialidadeAsync(string especialidade)
+        public async Task<IActionResult> ListarPorEspecialidadeAsync(string especialidade)
         {
             if (Enum.TryParse(especialidade, out Especialidade especEnum))
             {
@@ -77,13 +76,6 @@ namespace MedVoll.Web.Controllers
                 return Json(medicos);
             }
             return BadRequest("Especialidade inválida.");
-        }
-
-        [HttpGet]
-        [Route("especialidades")]
-        public Especialidade[] Especialidades()
-        {
-            return (Especialidade[])Enum.GetValues(typeof(Especialidade));
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using MedVoll.Web.Dtos;
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
-using MedVoll.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedVoll.Web.Controllers
@@ -9,8 +8,8 @@ namespace MedVoll.Web.Controllers
     [Route("consultas")]
     public class ConsultaController : BaseController
     {
-        private const string PaginaListagem = "ListagemConsultas";
-        private const string PaginaCadastro = "FormularioConsulta";
+        private const string PaginaListagem = "Listagem";
+        private const string PaginaCadastro = "Formulario";
 
         private readonly IConsultaService _consultaservice;
         private readonly IMedicoService _medicoService;
@@ -23,7 +22,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("{page?}")]
-        public async Task<IActionResult> CarregarPaginaListagemAsync([FromQuery] int page = 1)
+        public async Task<IActionResult> ListarAsync([FromQuery] int page = 1)
         {
             var consultasAtivas = await _consultaservice.ListarAsync(page);
             ViewBag.Consultas = consultasAtivas;
@@ -33,7 +32,7 @@ namespace MedVoll.Web.Controllers
 
         [HttpGet]
         [Route("formulario/{id?}")]
-        public async Task<IActionResult> CarregarPaginaAgendaConsultaAsync(long? id)
+        public async Task<IActionResult> ObterFormularioAsync(long? id)
         {
             var dados = id.HasValue
                 ? await _consultaservice.CarregarPorIdAsync(id.Value)
@@ -43,10 +42,9 @@ namespace MedVoll.Web.Controllers
             return View(PaginaCadastro, dados);
         }
 
-
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CadastrarAsync([FromForm] ConsultaDto dados)
+        public async Task<IActionResult> SalvarAsync([FromForm] ConsultaDto dados)
         {
             if (dados._method == "delete")
             {
@@ -72,13 +70,6 @@ namespace MedVoll.Web.Controllers
                 ViewBag.Dados = dados;
                 return View(PaginaCadastro);
             }
-        }
-
-        [HttpGet]
-        [Route("especialidades")]
-        public Especialidade[] Especialidades()
-        {
-            return (Especialidade[])Enum.GetValues(typeof(Especialidade));
         }
     }
 }
