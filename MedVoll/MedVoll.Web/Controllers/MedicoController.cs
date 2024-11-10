@@ -2,8 +2,8 @@
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
+using MedVoll.Web.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MedVoll.Web.Controllers
 {
@@ -33,7 +33,6 @@ namespace MedVoll.Web.Controllers
         {
             var dados = id.HasValue 
                 ? await _service.CarregarPorIdAsync(id.Value) 
-                //: new DadosCadastroMedico();
                 : new MedicoDto();
 
             return View(PaginaCadastro, dados);
@@ -41,9 +40,14 @@ namespace MedVoll.Web.Controllers
 
         [HttpPost]
         [Route("")]
-        //public async Task<IActionResult> CadastrarAsync([FromForm] DadosCadastroMedico dados)
         public async Task<IActionResult> CadastrarAsync([FromForm] MedicoDto dados)
         {
+            if (dados._method == "delete")
+            {
+                await _service.ExcluirAsync(dados.Id.Value);
+                return Redirect("/consultas");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(PaginaCadastro, dados);
@@ -60,14 +64,6 @@ namespace MedVoll.Web.Controllers
                 ViewBag.Dados = dados;
                 return View(PaginaCadastro);
             }
-        }
-
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> ExcluirAsync(long id)
-        {
-            await _service.ExcluirAsync(id);
-            return Redirect("/medicos");
         }
 
         [HttpGet]

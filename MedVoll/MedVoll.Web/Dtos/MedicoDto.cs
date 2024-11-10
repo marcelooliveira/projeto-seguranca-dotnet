@@ -21,6 +21,7 @@ namespace MedVoll.Web.Dtos
         }
 
         public long? Id { get; set; }
+        public string _method { get; set; }
         [Required(ErrorMessage = "Campo obrigatório"), MinLength(1)]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo obrigatório"), EmailAddress]
