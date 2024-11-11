@@ -1,13 +1,20 @@
+using MedVoll.Web.Filters;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 using MedVoll.Web.Repositories;
 using MedVoll.Web.Services;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<ExceptionHandlerFilter>();
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<ExceptionHandlerFilter>();
+});
 
 var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlite(connectionString));
@@ -22,8 +29,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/erro/500");
+    app.UseStatusCodePagesWithReExecute("/erro/{0}");
 }
+
 app.UseStaticFiles();
 
 app.UseRouting();
