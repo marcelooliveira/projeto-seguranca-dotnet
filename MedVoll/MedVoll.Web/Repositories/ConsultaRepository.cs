@@ -13,7 +13,7 @@ namespace MedVoll.Web.Repositories
             _context = context;
         }
 
-        public async Task<IQueryable<Consulta>> GetAllOrderedByDataAsync()
+        public IQueryable<Consulta> GetAllOrderedByData()
         {
             return _context.Consultas.Include(c => c.Medico).OrderBy(c => c.Data);
         }

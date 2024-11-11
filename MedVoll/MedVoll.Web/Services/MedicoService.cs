@@ -1,4 +1,5 @@
 ﻿using MedVoll.Web.Dtos;
+using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 
@@ -16,14 +17,14 @@ namespace MedVoll.Web.Services
 
         public async Task<PaginatedList<MedicoDto>> ListarAsync(int? page)
         {
-            var medicos = await _repository.GetAllAsync();
+            var medicos = _repository.GetAll();
             IQueryable<MedicoDto> dtos = medicos.Select(m => new MedicoDto(m));
             return await PaginatedList<MedicoDto>.CreateAsync(dtos, page ?? 1, PageSize);
         }
 
-        public async Task<IEnumerable<MedicoDto>> ListarTodosAsync()
+        public IEnumerable<MedicoDto> ListarTodos()
         {
-            var medicos = await _repository.GetAllAsync();
+            var medicos = _repository.GetAll();
             return medicos.Select(m => new MedicoDto(m)).AsEnumerable();
         }
 
@@ -31,7 +32,7 @@ namespace MedVoll.Web.Services
         {
             if (await _repository.IsJaCadastradoAsync(dados.Email, dados.Crm, dados.Id))
             {
-                throw new Exception("E-mail ou CRM já cadastrado para outro médico!");
+                throw new RegraDeNegocioException("E-mail ou CRM já cadastrado para outro médico!");
             }
 
             if (dados.Id == null)
@@ -42,7 +43,7 @@ namespace MedVoll.Web.Services
             else
             {
                 var medico = await _repository.FindByIdAsync(dados.Id.Value);
-                if (medico == null) throw new Exception("Médico não encontrado.");
+                if (medico == null) throw new RegraDeNegocioException("Médico não encontrado.");
 
                 medico.AtualizarDados(dados);
                 await _repository.UpdateAsync(medico);
@@ -52,7 +53,7 @@ namespace MedVoll.Web.Services
         public async Task<MedicoDto> CarregarPorIdAsync(long id)
         {
             var medico = await _repository.FindByIdAsync(id);
-            if (medico == null) throw new Exception("Médico não encontrado.");
+            if (medico == null) throw new RegraDeNegocioException("Médico não encontrado.");
 
             return new MedicoDto(medico);
         }

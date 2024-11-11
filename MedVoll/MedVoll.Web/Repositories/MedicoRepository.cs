@@ -38,7 +38,7 @@ namespace MedVoll.Web.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Medico> FindByIdAsync(long id)
+        public async Task<Medico?> FindByIdAsync(long id)
         {
             return await _context.Medicos.FindAsync(id);
         }
@@ -53,7 +53,7 @@ namespace MedVoll.Web.Repositories
             }
         }
 
-        public async Task<IQueryable<Medico>> GetAllAsync()
+        public IQueryable<Medico> GetAll()
         {
             return _context.Medicos.AsQueryable();
         }

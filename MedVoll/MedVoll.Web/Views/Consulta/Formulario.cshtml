@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Agendamento de Consultas";
     var especialidades = ViewData["Especialidades"] as List<Especialidade>;
+    especialidades = especialidades ?? new List<Especialidade>();
     var medicos = ViewData["Medicos"] as List<MedicoDto>;
+    medicos = medicos ?? new List<MedicoDto>();
 }
 
 <main class="container">

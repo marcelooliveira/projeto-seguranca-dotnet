@@ -9,7 +9,7 @@ namespace MedVoll.Web.Interfaces
         Task<MedicoDto> CarregarPorIdAsync(long id);
         Task ExcluirAsync(long id);
         Task<PaginatedList<MedicoDto>> ListarAsync(int? page);
-        Task<IEnumerable<MedicoDto>> ListarTodosAsync();
+        IEnumerable<MedicoDto> ListarTodos();
         Task<IEnumerable<MedicoDto>> ListarPorEspecialidadeAsync(Especialidade especialidade);
 
     }

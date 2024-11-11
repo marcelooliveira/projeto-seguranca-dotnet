@@ -37,7 +37,7 @@ namespace MedVoll.Web.Controllers
             var dados = id.HasValue
                 ? await _consultaservice.CarregarPorIdAsync(id.Value)
                 : new ConsultaDto { Data = DateTime.Now };
-            IEnumerable<MedicoDto> medicos = await _medicoService.ListarTodosAsync();
+            IEnumerable<MedicoDto> medicos = _medicoService.ListarTodos();
             ViewData["Medicos"] = medicos.ToList();
             return View(PaginaCadastro, dados);
         }
@@ -48,13 +48,13 @@ namespace MedVoll.Web.Controllers
         {
             if (dados._method == "delete")
             {
-                await _consultaservice.ExcluirAsync(dados.Id.Value);
+                await _consultaservice.ExcluirAsync(dados.Id);
                 return Redirect("/consultas");
             }
 
             if (!ModelState.IsValid)
             {
-                IEnumerable<MedicoDto> medicos = await _medicoService.ListarTodosAsync();
+                IEnumerable<MedicoDto> medicos = _medicoService.ListarTodos();
                 ViewData["Medicos"] = medicos.ToList();
                 return View(PaginaCadastro, dados);
             }

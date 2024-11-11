@@ -8,9 +8,9 @@ namespace MedVoll.Web.Interfaces
         Task<IEnumerable<Medico>> FindByEspecialidadeAsync(Especialidade especialidade);
         Task InsertAsync(Medico medico);
         Task UpdateAsync(Medico medico);
-        Task<Medico> FindByIdAsync(long id);
+        Task<Medico?> FindByIdAsync(long id);
         Task DeleteByIdAsync(long id);
-        Task<IQueryable<Medico>> GetAllAsync();
+        IQueryable<Medico> GetAll();
     }
 }
 

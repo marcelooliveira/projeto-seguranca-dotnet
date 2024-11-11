@@ -1,4 +1,5 @@
 ﻿using MedVoll.Web.Dtos;
+using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 
@@ -18,7 +19,7 @@ namespace MedVoll.Web.Services
 
         public async Task<PaginatedList<ConsultaDto>> ListarAsync(int? page)
         {
-            var consultas = await _consultaRepository.GetAllOrderedByDataAsync();
+            var consultas = _consultaRepository.GetAllOrderedByData();
             IQueryable<ConsultaDto> dtos = consultas.Select(m => new ConsultaDto(m));
             return await PaginatedList<ConsultaDto>.CreateAsync(dtos, page ?? 1, PageSize);
         }
@@ -28,7 +29,7 @@ namespace MedVoll.Web.Services
             var medicoConsulta = await _medicoRepository.FindByIdAsync(dados.IdMedico);
             if (medicoConsulta == null)
             {
-                throw new Exception("Medico não encontrado.");
+                throw new RegraDeNegocioException("Medico não encontrado.");
             }
 
             if (dados.Id == null)
@@ -38,8 +39,8 @@ namespace MedVoll.Web.Services
             }
             else
             {
-                var consulta = await _consultaRepository.FindByIdAsync(dados.Id.Value);
-                if (consulta == null) throw new Exception("Consulta não encontrada.");
+                var consulta = await _consultaRepository.FindByIdAsync(dados.Id);
+                if (consulta == null) throw new RegraDeNegocioException("Consulta não encontrada.");
 
                 consulta.ModificarDados(medicoConsulta, dados);
                 await _consultaRepository.UpdateAsync(consulta);
@@ -49,10 +50,10 @@ namespace MedVoll.Web.Services
         public async Task<ConsultaDto> CarregarPorIdAsync(long id)
         {
             var consulta = await _consultaRepository.FindByIdAsync(id);
-            if (consulta == null) throw new Exception("Consulta não encontrada.");
+            if (consulta == null) throw new RegraDeNegocioException("Consulta não encontrada.");
 
             var medicoConsulta = await _medicoRepository.FindByIdAsync(consulta.Medico.Id);
-            return new ConsultaDto(consulta.Id, consulta.Medico.Id, consulta.Paciente, consulta.Data, medicoConsulta.Especialidade);
+            return new ConsultaDto(consulta.Id, consulta.Medico.Id, consulta.Paciente, consulta.Data, medicoConsulta!.Especialidade);
         }
 
         public async Task ExcluirAsync(long id)

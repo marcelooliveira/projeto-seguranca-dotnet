@@ -4,7 +4,7 @@ namespace MedVoll.Web.Interfaces
 {
     public interface IConsultaRepository
     {
-        Task<IQueryable<Consulta>> GetAllOrderedByDataAsync();
+        IQueryable<Consulta> GetAllOrderedByData();
         Task SaveAsync(Consulta consulta);
         Task<Consulta> FindByIdAsync(long id);
         Task DeleteByIdAsync(long id);

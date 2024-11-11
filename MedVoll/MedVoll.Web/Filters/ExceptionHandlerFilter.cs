@@ -7,6 +7,7 @@ namespace MedVoll.Web.Filters
     {
         public void OnException(ExceptionContext context)
         {
+#if !DEBUG
             if (context.Exception is KeyNotFoundException || context.Exception is InvalidOperationException)
             {
                 context.Result = new RedirectToActionResult("404", "Erro", null);
@@ -17,6 +18,7 @@ namespace MedVoll.Web.Filters
                 context.Result = new RedirectToActionResult("500", "Erro", null);
                 context.ExceptionHandled = true;
             }
+#endif
         }
     }
 }
