@@ -20,25 +20,7 @@ dotnet run
 
 ## Estrutura das Tabelas
 
-:::mermaid
-erDiagram
-    MEDICOS {
-        long Id PK
-        string Nome
-        string Email
-        string Telefone
-        string Crm
-        int Especialidade
-    }
-    CONSULTAS {
-        long Id PK
-        string Paciente
-        long MedicoId FK
-        datetime Data
-    }
-
-    MEDICOS ||--o{ CONSULTAS : "possui"
-:::
+![alt text](docs/er.png)
 
 As tabelas medicos e consultas foram criadas para gerenciar dados médicos e de consultas em um sistema de agendamento. A tabela medicos armazena informações dos médicos, incluindo Id, Nome, Email, Telefone, Crm (registro profissional) e Especialidade. Cada médico pode ter várias consultas associadas, mas uma consulta está associada a apenas um médico.
 
@@ -130,7 +112,3 @@ Contém os serviços que implementam a lógica de negócios.
 3. **Migrations**: O Entity Framework Core é usado para gerenciar o banco de dados. As migrações facilitam a criação e atualização de tabelas de `Medico` e `Consulta`.
 
 4. **Tratamento de Erros**: O `ExceptionHandlerFilter` captura exceções de negócios e fornece respostas padronizadas para os erros.
-
----
-
-Este README fornece uma visão geral da estrutura do projeto ASP.NET Core e descreve o papel de cada componente no funcionamento do sistema.
