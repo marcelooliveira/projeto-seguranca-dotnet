@@ -4,6 +4,12 @@ Este é um projeto ASP.NET Core MVC desenvolvido para gerenciar médicos e consu
 
 ## Executando o Projeto
 
+Após baixar o repositório, vá para a pasta do projeto web:
+
+```
+cd MedVoll\MedVoll.Web
+```
+
 Para inicializar o projeto **MedVoll.Web** com o banco de dados configurado, é necessário executar o comando:
 
 ```
