@@ -57,10 +57,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function openModal(modal) {
         modal.style.display = 'block';
+        modal.classList.remove('fade');
     }
 
     function closeModal(modal) {
         modal.style.display = 'none';
+        modal.classList.add('fade');
     }
 
     function setupModalTriggers(modalId) {
