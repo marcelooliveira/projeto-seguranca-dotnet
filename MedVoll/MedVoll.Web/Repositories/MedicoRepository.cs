@@ -1,4 +1,5 @@
-﻿using MedVoll.Web.Interfaces;
+﻿using MedVoll.Web.Data;
+using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
 using Microsoft.EntityFrameworkCore;
 

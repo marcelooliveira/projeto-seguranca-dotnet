@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MedVoll.Web.Migrations
+namespace MedVoll.Web.Data.Migrations
 {
     /// <inheritdoc />
     public partial class CreateEspecialidadeTable : Migration

@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedVoll.Web.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace MedVoll.Web.Models
+namespace MedVoll.Web.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -36,6 +37,8 @@ namespace MedVoll.Web.Models
                       .HasForeignKey(c => c.MedicoId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

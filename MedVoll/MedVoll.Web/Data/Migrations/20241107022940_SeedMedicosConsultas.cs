@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MedVoll.Web.Migrations
+namespace MedVoll.Web.Data.Migrations
 {
     public partial class SeedMedicosConsultas : Migration
     {
