@@ -68,9 +68,7 @@ body {
     background: none;
     border: none;
     color: #333;
-    padding: 10px 0;
     cursor: pointer;
-    text-transform: uppercase;
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s;
@@ -332,7 +330,7 @@ body {
 .footer .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 .footer img {
