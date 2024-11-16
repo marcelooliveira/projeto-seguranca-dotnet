@@ -3,7 +3,6 @@ using MedVoll.Web.Filters;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Repositories;
 using MedVoll.Web.Services;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,8 +25,11 @@ builder.Services.AddTransient<IConsultaService, ConsultaService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+}
+else
 {
     app.UseExceptionHandler("/erro/500");
     app.UseStatusCodePagesWithReExecute("/erro/{0}");
