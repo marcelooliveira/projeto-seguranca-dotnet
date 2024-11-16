@@ -15,6 +15,51 @@
   - Configurar políticas de autorização usando `AuthorizationPolicyBuilder` e criar políticas de acesso restrito.
   - Criar usuários específicos para testes usando `InMemoryUserStore`.
 
+```
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 9.0.0
+
+ApplicationDbContext: IdentityDbContext
+
+
+dotnet ef migrations add CreateIdentitySchema
+dotnet ef database update
+
+
+Add
+	Scaffolding Item
+		Identity
+			Login
+			Register
+
+	app.MapRazorPages()
+		.WithStaticAssets();
+
+_Layout.cshtml
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+    </header>
+
+    .footer .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-items: stretch; /* <<<<<------*/
+    }
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #333;
+    /*padding: 10px 0;*/
+    cursor: pointer;
+    /*text-transform: uppercase;*/
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+```
+
 ---
 
 #### Aula 2: Autenticação e Autorização Personalizadas
