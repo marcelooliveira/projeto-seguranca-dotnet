@@ -62,11 +62,25 @@ _Layout.cshtml
 
 ---
 
-#### Aula 2: Autenticação e Autorização Personalizadas
+#### Aula 2: Configurar ASP.NET Core Identity
 
 - **Login e Logout Personalizados**:
   - Criar páginas de login e logout com Razor Pages e personalizar a experiência do usuário.
   - **Configuração de filtros de segurança**: Configurar `AuthenticationScheme` e `CookiePolicy` para customizar os cookies de autenticação.
+  [Configurar ASP.NET Core Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-9.0)
+
+    - Identity options
+        - User
+        - Sign-in
+        - Claims Identity
+        - Lockout
+        - Password
+        - Password Hasher options
+        - Tokens
+        - ConfigureApplicationCookie
+    - Globally require all users to be authenticated
+    - ISecurityStampValidator and SignOut everywhere
+
 - **Configurações de HTTP e Filtros de Requisição**:
   - Configurar o `Middleware` de requisições HTTP para evitar a exposição de recursos de front-end não autorizados.
   - Customizar as permissões de acesso aos recursos de CSS e JavaScript para evitar problemas de carregamento.
