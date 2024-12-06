@@ -29,12 +29,7 @@ builder.Services.AddTransient<IConsultaRepository, ConsultaRepository>();
 builder.Services.AddTransient<IMedicoService, MedicoService>();
 builder.Services.AddTransient<IConsultaService, ConsultaService>();
 
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});
+builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
