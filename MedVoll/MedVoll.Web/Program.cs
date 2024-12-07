@@ -29,6 +29,16 @@ builder.Services.AddTransient<IConsultaRepository, ConsultaRepository>();
 builder.Services.AddTransient<IMedicoService, MedicoService>();
 builder.Services.AddTransient<IConsultaService, ConsultaService>();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = true; // Exigir e-mails confirmados para login
+    options.SignIn.RequireConfirmedPhoneNumber = false; // Não exigir confirmação de número de telefone
+
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+    options.Lockout.MaxFailedAccessAttempts = 3;
+});
+
 builder.Services.AddAuthorization();
 
 
