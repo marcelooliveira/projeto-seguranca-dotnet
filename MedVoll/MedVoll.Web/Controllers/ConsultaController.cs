@@ -56,7 +56,7 @@ namespace MedVoll.Web.Controllers
                 return Redirect("/consultas");
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) // Vídeo 4.1 - Validando dados
             {
                 IEnumerable<MedicoDto> medicos = _medicoService.ListarTodos();
                 ViewData["Medicos"] = medicos.ToList();

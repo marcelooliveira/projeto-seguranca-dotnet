@@ -53,7 +53,7 @@ namespace MedVoll.Web.Controllers
                 return Redirect("/medicos");
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) // Vídeo 4.1 - Validando dados
             {
                 return View(PaginaCadastro, dados);
             }
