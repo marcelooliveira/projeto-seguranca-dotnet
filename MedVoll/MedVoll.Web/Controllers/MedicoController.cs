@@ -2,12 +2,12 @@
 using MedVoll.Web.Exceptions;
 using MedVoll.Web.Interfaces;
 using MedVoll.Web.Models;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization; //movido de Aula 1.4 para Aula 2.1
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedVoll.Web.Controllers
 {
-    [Authorize()]
+    [Authorize()] //movido de Aula 1.4 para Aula 2.1
     [Route("medicos")]
     public class MedicoController : BaseController
     {

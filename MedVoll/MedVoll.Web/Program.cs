@@ -59,7 +59,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 8; // Tamanho mínimo da senha
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(); //movido de Aula 1.4 para Aula 2.1
 
 
 var app = builder.Build();
