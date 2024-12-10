@@ -67,6 +67,13 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(1); // Tempo de expiração da sessão
 });
 
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "VollMed.AntiForgery"; // Nome personalizado do cookie
+    options.Cookie.HttpOnly = true; // Evitar acesso via JavaScript
+    options.HeaderName = "X-CSRF-TOKEN"; // Cabeçalho personalizado para APIs
+});
+
 builder.Services.AddAuthorization();
 
 
