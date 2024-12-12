@@ -2,6 +2,7 @@
 using Microsoft.Build.Framework;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Data;
+using System.Security.Claims;
 
 namespace MedVoll.Web.Data
 {
@@ -31,13 +32,20 @@ namespace MedVoll.Web.Data
                 await roleManager.CreateAsync(new IdentityRole(adminRole));
             }
 
+            IdentityUser? alice = await userManager.FindByEmailAsync("alice@smith.com");
+
             // Adiciona os admins
             IList<IdentityUser> admins = await userManager.GetUsersInRoleAsync(adminRole);
-            if (!admins.Any(a => a.Email == "alice@smith.com"))
+            if (!admins.Any(a => a.Email == alice.Email))
             {
-                IdentityUser? alice = await userManager.FindByEmailAsync("alice@smith.com");
                 await userManager.AddToRoleAsync(alice, adminRole);
             }
+
+            //Adiciona claims
+            IList<Claim> userClaims = await userManager.GetClaimsAsync(alice);
+            await userManager.RemoveClaimsAsync(alice, userClaims);
+            await userManager.AddClaimAsync(alice, new Claim("FullName", "Alice Smith"));
+            await userManager.AddClaimAsync(alice, new Claim("Role", "Admin"));
         }
 
         private static async Task CreateUserAsync(UserManager<IdentityUser> userManager, string email, string password, string role)
