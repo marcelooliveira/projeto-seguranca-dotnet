@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Data;
 
 namespace MedVoll.Web.Data
 {
@@ -19,6 +22,22 @@ namespace MedVoll.Web.Data
             // Cria os usuários
             await CreateUserAsync(userManager, "alice@smith.com", "Password@123", userRole);
             await CreateUserAsync(userManager, "bob@smith.com", "Password@123", userRole);
+
+
+            // Verifica e cria a função "Admin", se necessário
+            const string adminRole = "Admin";
+            if (!await roleManager.RoleExistsAsync(adminRole))
+            {
+                await roleManager.CreateAsync(new IdentityRole(adminRole));
+            }
+
+            // Adiciona os admins
+            IList<IdentityUser> admins = await userManager.GetUsersInRoleAsync(adminRole);
+            if (!admins.Any(a => a.Email == "alice@smith.com"))
+            {
+                IdentityUser? alice = await userManager.FindByEmailAsync("alice@smith.com");
+                await userManager.AddToRoleAsync(alice, adminRole);
+            }
         }
 
         private static async Task CreateUserAsync(UserManager<IdentityUser> userManager, string email, string password, string role)
